@@ -5,12 +5,12 @@ const month = props => {
   const { month, monthsData, mouseOver, mouseLeave } = props;
   const usersCount = monthsData[month].length;
   const usersCountStyle = usersCount => {
-    const userStyle = new Map();
-    userStyle.set(usersCount >= 0, styles.Few);
-    userStyle.set(usersCount >= 3, styles.Average);
-    userStyle.set(usersCount >= 7, styles.Plenty);
-    userStyle.set(usersCount >= 11, styles.VeryNumerous);
-    return userStyle.get(true);
+    const monthStyle = new Map();
+    monthStyle.set(usersCount >= 0, styles.Few);
+    monthStyle.set(usersCount >= 3, styles.Average);
+    monthStyle.set(usersCount >= 7, styles.Plenty);
+    monthStyle.set(usersCount >= 11, styles.VeryNumerous);
+    return monthStyle.get(true);
   };
 
   return (
