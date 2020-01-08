@@ -3,26 +3,24 @@ import styles from './Month.module.css';
 
 const month = props => {
   const { month, monthsData, mouseOver, mouseLeave } = props;
-  let userCountStyle;
-  if (monthsData[month].length <= 2) {
-    userCountStyle = styles.Few;
-  } else if (monthsData[month].length <= 6) {
-    userCountStyle = styles.Average;
-  } else if (monthsData[month].length <= 10) {
-    userCountStyle = styles.Plenty;
-  }
-  if (monthsData[month].length >= 11) {
-    userCountStyle = styles.VeryNumerous;
-  }
+  const usersCount = monthsData[month].length;
+  const usersCountStyle = usersCount => {
+    const userStyle = new Map();
+    userStyle.set(usersCount >= 0, styles.Few);
+    userStyle.set(usersCount >= 3, styles.Average);
+    userStyle.set(usersCount >= 7, styles.Plenty);
+    userStyle.set(usersCount >= 11, styles.VeryNumerous);
+    return userStyle.get(true);
+  };
 
   return (
     <li
-      className={[styles.Month, userCountStyle].join(' ')}
+      className={[styles.Month, usersCountStyle(usersCount)].join(' ')}
       onMouseOver={() => mouseOver(month)}
       onMouseLeave={mouseLeave}
       key={monthsData[month][0].id}
     >
-      {month}: {monthsData[month].length}
+      {month}: {usersCount}
     </li>
   );
 };
