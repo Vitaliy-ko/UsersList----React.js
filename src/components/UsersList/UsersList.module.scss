@@ -1,0 +1,50 @@
+@import './../../UI/scss/variables.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.UsersList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 320px;
+}
+
+.User {
+  margin-bottom: 3px;
+}
+
+.User__Number {
+  border-radius: 0.8em;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.6em;
+}
+
+.Few,
+.Average,
+.Plenty,
+.VeryNumerous {
+  color: white;
+}
+
+.Few {
+  background-color: $Few-color;
+}
+
+.Average {
+  background-color: $Average-color;
+}
+
+.Plenty {
+  background-color: $Plenty-color;
+}
+
+.VeryNumerous {
+  background-color: $VeryNumerous-color;
+}
