@@ -58,7 +58,7 @@ class UsersInformation extends Component {
   };
 
   mouseLeaveHandler = () => {
-    // this.setState({ activeList: null });
+    this.setState({ activeList: null });
   };
 
   render() {
