@@ -1,15 +1,20 @@
 import React from 'react';
 import styles from './UsersList.module.css';
+import UsersContext from './../../context/UsersContext';
 
-const usersList = props => {
-  if (!props.activeList) return null;
-  return (
-    <ol className={styles.Users}>
-      {props.activeList.map(item => (
-        <li>First Name: {item.firstName}</li>
-      ))}
-    </ol>
-  );
-};
+const usersList = props => (
+  <UsersContext.Consumer>
+    {({ activeList }) => {
+      if (!activeList) return null;
+      return (
+        <ol className={styles.Users}>
+          {activeList.map(user => (
+            <li key={user.id}>First Name: {user.firstName}</li>
+          ))}
+        </ol>
+      );
+    }}
+  </UsersContext.Consumer>
+);
 
 export default usersList;

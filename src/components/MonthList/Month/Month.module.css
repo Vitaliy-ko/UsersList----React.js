@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.Month:hover {
+  color: white;
+}
+
 .Few {
   color: grey;
   border-color: grey;
@@ -27,5 +31,25 @@
 
 .VeryNumerous {
   color: #d40f0f;
+  border-color: #d40f0f;
+}
+
+.Few:hover {
+  color: grey;
+  border-color: grey;
+}
+
+.Average:hover {
+  background-color: #3458eb;
+  border-color: #3458eb;
+}
+
+.Plenty:hover {
+  background-color: #36e622;
+  border-color: #36e622;
+}
+
+.VeryNumerous:hover {
+  background-color: #d40f0f;
   border-color: #d40f0f;
 }

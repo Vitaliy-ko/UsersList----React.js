@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from '../../axios';
 import UsersList from '../../components/UsersList/UsersList';
-import Month from '../../components/Month/Month';
-import styles from './MonthsList.module.css';
+import MonthList from '../../components/MonthList/MonthList';
+import UserContext from './../../context/UsersContext';
 
 class MonthsList extends Component {
   state = {
@@ -26,12 +26,17 @@ class MonthsList extends Component {
   };
 
   componentDidMount() {
+    this.loadUsersData();
+  }
+
+  loadUsersData = () => {
     const { monthList } = this.state;
     axios
       .get('users')
       .then(res => {
         const monthsData = {};
         const users = res.data;
+
         for (let user of users) {
           const month = new Date(user.dob).getMonth();
           if (!monthsData.hasOwnProperty(monthList[month])) {
@@ -39,12 +44,13 @@ class MonthsList extends Component {
           }
           monthsData[monthList[month]].push(user);
         }
+
         this.setState({ monthsData });
       })
       .catch(error => {
         this.setState({ error });
       });
-  }
+  };
 
   mouseOverHandler = month => {
     this.setState({ activeList: this.state.monthsData[month] });
@@ -55,32 +61,16 @@ class MonthsList extends Component {
   };
 
   render() {
-    let months = null;
-    if (!this.state.error) {
-      months = <p className={styles.MonthsList}>Loading...</p>;
-    } else {
-      months = <p className={styles.MonthsList}>Data can't be loaded!</p>;
-    }
-
-    if (Object.entries(this.state.monthsData).length !== 0) {
-      months = (
-        <ul className={styles.MonthsList}>
-          {Object.keys(this.state.monthsData).map(month => (
-            <Month
-              mouseOver={() => this.mouseOverHandler(month)}
-              mouseLeave={() => this.mouseLeaveHandler()}
-              monthsData={this.state.monthsData}
-              month={month}
-            />
-          ))}
-        </ul>
-      );
-    }
-
     return (
       <div>
-        {months}
-        <UsersList activeList={this.state.activeList} />
+        <UserContext.Provider value={{
+          mouseOver: this.mouseOverHandler,
+          mouseLeave: this.mouseLeaveHandler,
+          ...this.state
+        }}>
+          <MonthList />
+          <UsersList activeList={this.state.activeList} />
+        </UserContext.Provider>
       </div>
     );
   }
