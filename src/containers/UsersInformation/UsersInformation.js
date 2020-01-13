@@ -69,7 +69,7 @@ class UsersInformation extends Component {
           ...this.state
         }}>
           <MonthsList />
-          <UsersList activeList={this.state.activeList} />
+          <UsersList />
         </UserContext.Provider>
     );
   }
