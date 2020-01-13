@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Month.module.css';
+import styles from './Month.module.scss';
 import UsersContext from '../../../context/UsersContext';
 
 const month = props => (
@@ -10,17 +10,19 @@ const month = props => (
 
       const usersCountStyle = usersCount => {
         const monthStyle = new Map();
-        monthStyle.set(usersCount >= 0, styles.Few);
-        monthStyle.set(usersCount >= 3, styles.Average);
-        monthStyle.set(usersCount >= 7, styles.Plenty);
-        monthStyle.set(usersCount >= 11, styles.VeryNumerous);
+        monthStyle.set(usersCount >= 0, 'Few');
+        monthStyle.set(usersCount >= 3, 'Average');
+        monthStyle.set(usersCount >= 7, 'Plenty');
+        monthStyle.set(usersCount >= 11, 'VeryNumerous');
         return monthStyle.get(true);
       };
 
+      const activeListStyle = usersCountStyle(usersCount);
+
       return (
         <li
-          className={[styles.Month, usersCountStyle(usersCount)].join(' ')}
-          onMouseOver={() => mouseOver(month)}
+          className={[styles.Month, styles[activeListStyle]].join(' ')}
+          onMouseOver={() => mouseOver(month, activeListStyle)}
           onMouseLeave={mouseLeave}
         >
           {month}: {usersCount}

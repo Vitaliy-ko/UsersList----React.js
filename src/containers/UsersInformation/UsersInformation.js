@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from '../../axios';
 import UsersList from '../../components/UsersList/UsersList';
-import MonthList from '../../components/MonthList/MonthList';
+import MonthsList from '../../components/MonthsList/MonthsList';
 import UserContext from './../../context/UsersContext';
 
-class MonthsList extends Component {
+class UsersInformation extends Component {
   state = {
     monthsData: {},
-    monthList: [
+    monthsList: [
       'January',
       'February',
       'March',
@@ -22,7 +22,8 @@ class MonthsList extends Component {
       'December'
     ],
     error: false,
-    activeList: null
+    activeList: null,
+    activeListStyle: ''
   };
 
   componentDidMount() {
@@ -30,7 +31,7 @@ class MonthsList extends Component {
   }
 
   loadUsersData = () => {
-    const { monthList } = this.state;
+    const { monthsList } = this.state;
     axios
       .get('users')
       .then(res => {
@@ -39,10 +40,10 @@ class MonthsList extends Component {
 
         for (let user of users) {
           const month = new Date(user.dob).getMonth();
-          if (!monthsData.hasOwnProperty(monthList[month])) {
-            monthsData[monthList[month]] = [];
+          if (!monthsData.hasOwnProperty(monthsList[month])) {
+            monthsData[monthsList[month]] = [];
           }
-          monthsData[monthList[month]].push(user);
+          monthsData[monthsList[month]].push(user);
         }
 
         this.setState({ monthsData });
@@ -52,28 +53,26 @@ class MonthsList extends Component {
       });
   };
 
-  mouseOverHandler = month => {
-    this.setState({ activeList: this.state.monthsData[month] });
+  mouseOverHandler = (month, activeListStyle) => {
+    this.setState({ activeList: this.state.monthsData[month], activeListStyle});
   };
 
   mouseLeaveHandler = () => {
-    this.setState({ activeList: null });
+    // this.setState({ activeList: null });
   };
 
   render() {
     return (
-      <div>
         <UserContext.Provider value={{
           mouseOver: this.mouseOverHandler,
           mouseLeave: this.mouseLeaveHandler,
           ...this.state
         }}>
-          <MonthList />
+          <MonthsList />
           <UsersList activeList={this.state.activeList} />
         </UserContext.Provider>
-      </div>
     );
   }
 }
 
-export default MonthsList;
+export default UsersInformation;

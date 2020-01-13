@@ -1,13 +1,13 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import UsersInformation from './containers/UsersInformation/UsersInformation';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <section className="App-header">
         <UsersInformation />
-      </header>
+      </section>
     </div>
   );
 }

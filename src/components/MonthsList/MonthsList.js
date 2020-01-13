@@ -1,11 +1,11 @@
 import React from 'react';
 import Month from './Month/Month';
-import styles from './MonthList.module.css';
-import UsersContext from './../../context/UsersContext';
+import styles from './MonthsList.module.scss';
+import UsersContext from '../../context/UsersContext';
 
 const monthList = props => (
   <UsersContext.Consumer>
-    {({monthsData, error}) => {
+    {({monthsData, monthsList, error}) => {
       let months = null;
       if (!error) {
         months = <p className={styles.MonthsList}>Loading...</p>;
@@ -16,7 +16,7 @@ const monthList = props => (
       if (Object.entries(monthsData).length !== 0) {
         months = (
           <ul className={styles.MonthsList}>
-            {Object.keys(monthsData).map(month => (
+            {monthsList.map(month => (
               <Month 
                 month={month} 
                 key={monthsData[month][0].id} 

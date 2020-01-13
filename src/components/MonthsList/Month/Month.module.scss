@@ -1,0 +1,58 @@
+@import './../../../UI/scss/variables.scss';
+
+.Month {
+  display: inline-block;
+  text-align: center;
+  list-style-type: none;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.Few {
+  color: $Few-color;
+  border-color: $Few-color;
+
+  &:hover {
+    color: $Few-color;
+    border-color: $Few-color;
+  }
+}
+
+.Average {
+  color: $Average-color;
+  border-color: $Average-color;
+
+  &:hover {
+    background-color: $Average-color;
+    border-color: $Average-color;
+  }
+}
+
+.Plenty {
+  color: $Plenty-color;
+  border-color: $Plenty-color;
+
+  &:hover {
+    background-color: $Plenty-color;
+    border-color: $Plenty-color;
+  }
+}
+
+.VeryNumerous {
+  color: $VeryNumerous-color;
+  border-color: $VeryNumerous-color;
+
+  &:hover {
+    background-color: $VeryNumerous-color;
+    border-color: $VeryNumerous-color;
+  }
+}
